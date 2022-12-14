@@ -6,6 +6,6 @@ hp10a
 #ansible_password=pass
 ansible_connection=winrm
 ansible_winrm_server_cert_validation=ignore
-ansible_port=5985
-ansible_winrm_scheme=http
-ansible_winrm_transport=ntlm
+ansible_port=5986
+ansible_winrm_scheme=https
+
