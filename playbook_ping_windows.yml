@@ -20,3 +20,4 @@
     -name: debug
       debug:
         var: current_version
+        
