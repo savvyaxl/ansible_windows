@@ -14,7 +14,7 @@
 
     - name: Obtain information about a registry key using short form
       ansible.windows.win_reg_stat:
-        path: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols
+        path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols
       register: current_version
 
     - name: debug
