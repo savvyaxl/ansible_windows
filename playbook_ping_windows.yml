@@ -21,7 +21,7 @@
     - name: Run basic PowerShell script
       ansible.windows.win_powershell:
         script: |
-          echo "Hello World"
+          wmic path softwareLicensingService get OA3xOriginalProductKey
       register: shell_out
 
     - name: debug
