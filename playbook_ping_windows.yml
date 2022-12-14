@@ -17,7 +17,6 @@
         path: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols
       register: current_version
 
-    -name: debug
+    - name: debug
       debug:
         var: current_version
-        
