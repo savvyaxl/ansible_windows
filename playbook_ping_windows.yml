@@ -17,3 +17,14 @@
     - name: debug
       debug:
         var: current_version
+
+    - name: Run basic PowerShell script
+      ansible.windows.win_powershell:
+        script: |
+          echo "Hello World"
+      register: shell_out
+
+    - name: debug
+      debug:
+        var: shell_out
+
