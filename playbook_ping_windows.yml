@@ -9,12 +9,9 @@
     ansible_password: "{{ password }}"
 
   tasks:
-    - name: ping
-      ansible.windows.win_ping:
-
     - name: Obtain information about a registry key using short form
       ansible.windows.win_reg_stat:
-        path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL
+        path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders
       register: current_version
 
     - name: debug
