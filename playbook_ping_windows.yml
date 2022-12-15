@@ -45,4 +45,4 @@
 
     - name: debug
       debug:
-        msg: "{{ program_list.stdout.split('\n') }}"
+        var: program_list
