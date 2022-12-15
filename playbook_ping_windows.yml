@@ -9,35 +9,35 @@
     ansible_password: "{{ password }}"
 
   tasks:
-    - name: Obtain information about a registry key using short form
-      ansible.windows.win_reg_stat:
-        path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders
-      register: current_version
-
-    - name: debug
-      debug:
-        var: current_version
-
-    - name: Run basic PowerShell script
-      ansible.windows.win_powershell:
-        script: |
-          wmic path softwareLicensingService get OA3xOriginalProductKey
-      register: shell_out
-
-    - name: debug
-      debug:
-        var: shell_out
-
-    - name: Search-only, return list of found updates (if any), log to C:\ansible_wu.txt
-      ansible.windows.win_updates:
-        category_names: SecurityUpdates
-        state: searched
-        log_path: C:\ansible_wu.txt
-      register: updates
-
-    - name: debug
-      debug:
-        var: updates
+    #- name: Obtain information about a registry key using short form
+    #  ansible.windows.win_reg_stat:
+    #    path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders
+    #  register: current_version
+#
+    #- name: debug
+    #  debug:
+    #    var: current_version
+#
+    #- name: Run basic PowerShell script
+    #  ansible.windows.win_powershell:
+    #    script: |
+    #      wmic path softwareLicensingService get OA3xOriginalProductKey
+    #  register: shell_out
+#
+    #- name: debug
+    #  debug:
+    #    var: shell_out
+#
+    #- name: Search-only, return list of found updates (if any), log to C:\ansible_wu.txt
+    #  ansible.windows.win_updates:
+    #    category_names: SecurityUpdates
+    #    state: searched
+    #    log_path: C:\ansible_wu.txt
+    #  register: updates
+#
+    #- name: debug
+    #  debug:
+    #    var: updates
 
     - name: Gather list
       win_shell: Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, DisplayVersion, Publisher, InstallDate | Format-Table AutoSize
