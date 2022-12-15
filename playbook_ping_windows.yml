@@ -45,4 +45,18 @@
 
     - name: debug
       debug:
-        var: program_list
+        var: program_list.stdout_lines
+
+#Get-WmiObject -Class "win32_quickfixengineering" | Select-Object -Property "Description", "HotfixID", @{Name="InstalledOn"; Expression={([DateTime]($_.InstalledOn)).ToLocalTime()}}
+
+    - name: Find installed KBs
+      ansible.windows.win_powershell:
+        script: |
+          Get-WmiObject -Class "win32_quickfixengineering" | 
+          Select-Object -Property "Description", "HotfixID", 
+          @{Name="InstalledOn"; Expression={([DateTime]($_.InstalledOn)).ToLocalTime()}}
+      register: installed_KBs
+
+    - name: debug
+      debug:
+        var: installed_KBs
