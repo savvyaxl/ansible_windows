@@ -59,4 +59,4 @@
 
     - name: debug
       debug:
-        var: "{{''.join([installed_KBs.output.Description,installed_KBs.output.HotfixID,installed_KBs.output.InstalledOn])}}"
+        var: installed_KBs.output
