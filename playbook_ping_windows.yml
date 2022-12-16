@@ -63,7 +63,7 @@
 
     - name: disable helpdesk login
       ansible.windows.win_regedit:
-        path: HKCU:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\SpecialAccounts\UserList
+        path: HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\SpecialAccounts\UserList
         name: helpdesk
         data: 0x0
         type: dword
