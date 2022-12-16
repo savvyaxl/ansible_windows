@@ -67,5 +67,10 @@
         name: helpdesk
         data: 0x0
         type: dword
+      register: installed_KBs
+
+    - name: debug
+      debug:
+        var: installed_KBs
 
 
