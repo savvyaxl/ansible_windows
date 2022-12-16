@@ -39,24 +39,33 @@
     #  debug:
     #    var: updates
 
-    - name: Gather list
-      win_shell: Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, DisplayVersion, Publisher, InstallDate | Format-Table -AutoSize
-      register: program_list
-
-    - name: debug
-      debug:
-        var: program_list.stdout_lines
+    #- name: Gather list
+    #  win_shell: Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, DisplayVersion, Publisher, InstallDate | Format-Table -AutoSize
+    #  register: program_list
+#
+    #- name: debug
+    #  debug:
+    #    var: program_list.stdout_lines
 
 #Get-WmiObject -Class "win32_quickfixengineering" | Select-Object -Property "Description", "HotfixID", @{Name="InstalledOn"; Expression={([DateTime]($_.InstalledOn)).ToLocalTime()}}
 
-    - name: Find installed KBs
-      ansible.windows.win_powershell:
-        script: |
-          Get-WmiObject -Class "win32_quickfixengineering" | 
-          Select-Object -Property "Description", "HotfixID", 
-          @{Name="InstalledOn"; Expression={([DateTime]($_.InstalledOn)).ToLocalTime()}}
-      register: installed_KBs
+    #- name: Find installed KBs
+    #  ansible.windows.win_powershell:
+    #    script: |
+    #      Get-WmiObject -Class "win32_quickfixengineering" | 
+    #      Select-Object -Property "Description", "HotfixID", 
+    #      @{Name="InstalledOn"; Expression={([DateTime]($_.InstalledOn)).ToLocalTime()}}
+    #  register: installed_KBs
+#
+    #- name: debug
+    #  debug:
+    #    var: installed_KBs.output
 
-    - name: debug
-      debug:
-        var: installed_KBs.output
+    - name: disable helpdesk login
+      ansible.windows.win_regedit:
+        path: HKCU:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\SpecialAccounts\UserList
+        name: helpdesk
+        data: 0x0
+        type: dword
+
+
