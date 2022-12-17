@@ -1,0 +1,21 @@
+---
+- hosts: windows
+  become: false
+  gather_facts: false
+  vars_files:
+  - vault/passwords
+  vars:
+    ansible_user: "{{ username }}"
+    ansible_password: "{{ password }}"
+    users_to_disable:
+      - helpdesk
+
+  tasks:
+    - name: disable logins
+      ansible.windows.win_regedit:
+        path: HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\SpecialAccounts\UserList
+        name: "{{item}}"
+        data: 0x0
+        type: dword
+      loop: "{{users_to_disable}}"
+
