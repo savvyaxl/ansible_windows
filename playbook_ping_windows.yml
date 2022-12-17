@@ -7,7 +7,7 @@
   vars:
     ansible_user: "{{ username }}"
     ansible_password: "{{ password }}"
-    userstodisable:
+    users_to_disable:
       - helpdesk
 
   tasks:
@@ -70,7 +70,7 @@
         data: 0x0
         type: dword
       register: installed_KBs
-      loop: "{{userstodisable}}"
+      loop: "{{users_to_disable}}"
 
     - name: debug
       debug:
